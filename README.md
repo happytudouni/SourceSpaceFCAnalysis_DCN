@@ -1,5 +1,4 @@
 # SourceSpaceFCAnalysis_DCN---
-typora-copy-images-to: upload
 ---
 
 These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
