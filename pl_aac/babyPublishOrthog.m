@@ -39,7 +39,7 @@ clearvars
 clc
 
 % user-defined base directory
-folderBase = '/Users/wanzexie/Dropbox/Collaboration/SourceSpaceFC/Data/';
+folderBase = 'pl_aac/';
 
 D = struct2table(dir(fullfile(folderBase,'PREPROC','FINAL')));
 D = D(~D.isdir,:);
