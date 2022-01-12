@@ -1,6 +1,5 @@
 # SourceSpaceFCAnalysis_DCN---
 ---
-
 These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
 
 # Background
@@ -16,14 +15,14 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
    
     >  In this folder create the following subfolders named as “Programs”, “Outputs”, “Sourcemodels”, “SourceData”, “Data”.   Copy and paste the .m and .mat files downloaded from “pl_pps” to the “Programs" folder.  Save the data downloaded to the “Data” folder. 
 4. The Matlab code should be executed as follows: 
-	a. Make sure the **EEGLAB and Fieldtrip** toolboxes have been downloaded and added to Matlab search path.
+	a. Make sure **EEGLAB and Fieldtrip** toolboxes have been downloaded and added to Matlab search path.
     b. Run "SourceSpaceFCanalysis_PPS.m" for one participant. 
    
     ```matlab
     cfg = []; % this would use the default parameters
     participantnumber = 2;
     SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
-    % you can also define the parameter for the function, like:
+    % you can also define the parameters used in the function, like:
     cfg = [];
     cfg.foi              = 'theta'; 
     cfg.fcmethod         = 'wpli';
@@ -34,7 +33,7 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
     ```
     c. Run the source-space FC analysis for all participants
     > type ```edit RunAnalysis4All``` in the command window
-    > change the settings for the program from line 31 to 40
+    > change the parameters for the SourceSpaceFCanalysis_PPS program from line 31 to 40
     > type the name of the program in the command window and hit enter
    
     ```
@@ -46,23 +45,27 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 # To use pl_aac, please do the followings
 
 1. Download all the files (.mat & .m) in the pl_aac folder.
-2. copy and paste the .m files downloaded from "pl_aac" to the "Programs" folder.
+2. Create a folder with an arbitrary name (e.g., 'pl_aac') and a few subfolders as shown in the following picture:
+
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyaqbo972aj30as09a3yk.jpg" alt="Screen Shot 2022-01-12 at 11.27.14 AM" style="zoom:50%;" />
+
+- Save the kernels and .mat files downloaded from 'Sourcemodels/pl_aac_sourcemodels/' to the 	'ADMIN' folder, and download the preprocessed data from "pl_aac_preprocessed" and save them to the 'FINAL' and 'OPEC' folders.
+
 3. The Matlab code should be executed as follows: 
-    a. Make sure **Brainstorm** is installed and added to the search path because pl_aac relies on functions in Brainstorm.
-    b. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window.
+   a. Make sure **Brainstorm** is installed and added to the search path because pl_aac relies on functions in Brainstorm.
+
+   b. on Line 42 in ```babyPublishOrthog.m```, define the 'folderBase' as the directory of the 'pl_aac' folder.
+
+   c. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
 
 - Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program. 
 - Note: The Signal Processing Toolbox (SPT) of Matlab is recommended to be installed to ensure all the programs would run smoothly. The functions in Fieldtrip and Brainstorm might use functions in the SPT, and the customized programs written by us also adopt SPT functions, e.g., the "bandpass.m" used to filter data in "SourceSpaceFCAnalysis_AAC" is a SPT function.  
 
-
-
 # Preprocessing programs
 
 In this tutorial we are also sharing the preprocessing programs (mostly automatic).
-1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we used for Xie et al.(2019), BMC Medicine. The parameters in these programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing.
-2. The proprocessing program used for the pl_aac pipeline was saved in the pl_aac_preproc folder: ```babyPublishPreProc```. This program was based on the preprocessing conducted for Toll et al. (2020), AJP. You may also reach out to WX for questions about this program. 
-
-
+1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing_pps.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we modified from the ones used for Xie et al.(2019), BMC Medicine. The parameters in these programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing.
+2. The proprocessing program used for the pl_aac pipeline was named as ```babyPublishPreProc```. This program was written based on the preprocessing procedures in Toll et al. (2020), AJP. You may also reach out to RT for questions about this program. 
 
 # Plotting
 
@@ -72,9 +75,7 @@ The brain FC figures depicting the results from using pl_pps were made with [Sur
 3. Load a node file, e.g., File --> Open --> BrainNet --> LPBA40.node
 4. Load an edge file, e.g., File --> Open --> BrainNet --> LPBA40.edge
 
-The brain FC figures for pl_pps were made with **Brainstorm**
-
-
+The brain FC figures for pl_aac were made with **Brainstorm**
 
 # Intermediate outputs 
 
@@ -178,7 +179,7 @@ line 305 to line 312
     cfg.parcmethod       = 'average';  % 'centroid', 'PCA'   
     cfg.methodtype       = 'eloreta';  % 'MNE'         
     cfg.age              = 12;    
-    [fcmatrix_all] = GenerageTxtFilesForStats(cfg);
+    [fcmatrix_all] = GenerateTxtFilesForStats(cfg);
     ```
 
   - The output of this program is a text file with the participant numbers, age, frequency band, and the FC for different pairs of lobes (e.g., *FF* refers to the average FC between ROIs within the frontal lobe; *FO* refers to the average FC between ROIs in the frontal and those in occipital lobes; and *lpba* is the average FC between all ROIs, i.e., whole-brain FC).
@@ -186,4 +187,5 @@ line 305 to line 312
   - This program will also plot the average adjacent matrix across participants.
 
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy8mj93nb7j30wy0u0k21.jpg" style="zoom: 50%;" />
+
 
