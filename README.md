@@ -1,5 +1,3 @@
-# SourceSpaceFCAnalysis_DCN---
----
 These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
 
 # Background
@@ -58,7 +56,8 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
    c. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
 
-- Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program. 
+- Note: The later connectivity steps between pl_aac and pl_pps are not dependent on the earlier source differences.
+- Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program.  
 - Note: The Signal Processing Toolbox (SPT) of Matlab is recommended to be installed to ensure all the programs would run smoothly. The functions in Fieldtrip and Brainstorm might use functions in the SPT, and the customized programs written by us also adopt SPT functions, e.g., the "bandpass.m" used to filter data in "SourceSpaceFCAnalysis_AAC" is a SPT function.  
 
 # Preprocessing programs
@@ -187,5 +186,4 @@ line 305 to line 312
   - This program will also plot the average adjacent matrix across participants.
 
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy8mj93nb7j30wy0u0k21.jpg" style="zoom: 50%;" />
-
 
