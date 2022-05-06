@@ -7,36 +7,42 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
 
 # To use pl_pps, please do the followings
-1. Download all the files (.mat & .m) in the pl_pps folder
-2. Download the source models and filters from the Sourcemodels folder
-3. Create a folder with an arbitrary name like “SourceSpaceFC” 
-   
-    >  In this folder create the following subfolders named as “Programs”, “Outputs”, “Sourcemodels”, “SourceData”, “Data”.   Copy and paste the .m and .mat files downloaded from “pl_pps” to the “Programs" folder.  Save the data downloaded to the “Data” folder. 
-4. The Matlab code should be executed as follows: 
-	a. Make sure **EEGLAB and Fieldtrip** toolboxes have been downloaded and added to Matlab search path.
-    b. Run "SourceSpaceFCanalysis_PPS.m" for one participant. 
-   
-    ```matlab
-    cfg = []; % this would use the default parameters
-    participantnumber = 2;
-    SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
-    % you can also define the parameters used in the function, like:
-    cfg = [];
-    cfg.foi              = 'theta'; 
-    cfg.fcmethod         = 'wpli';
-    cfg.parcmethod       = 'centroid'; 
-    cfg.age              = 36;
-    cfg.plotarg          = 0;
-    SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
-    ```
-    c. Run the source-space FC analysis for all participants
-    > type ```edit RunAnalysis4All``` in the command window
-    > change the parameters for the SourceSpaceFCanalysis_PPS program from line 31 to 40
-    > type the name of the program in the command window and hit enter
-   
-    ```
-    RunAnalysis4All
-    ```
+1. Download the SourceSpaceFC folder from the the pl_pps folder
+
+    - Go to the "Data" folder. 
+        - Example data have already been uploaded to the "Age12mos" and "Age36mos" folders. You should be able to see them once you open the folders. 
+        - To download all the data used in the manuscript, open "Data download.md" file, and then you can download the data following the instructions and have the EEG data for different ages saved in the local "Age12mos" and "Age36mos" folders.
+
+    - Go to the "Sourcemodels" folder. Download the source models and filters following the instructions in the "Download sourcemodels and efilters.md" document and have the files saved in your local "Sourcemodels" folder.
+    - Make sure to download and install **EEGLAB and Fieldtrip** toolboxes and add them to Matlab search path. We have the programs tested with the following Fieldtrip and EEGLAB versions:
+        - [fieldtrip-20210409 & ](https://www.fieldtriptoolbox.org/download/)
+        - [eeglab2021.1](https://eeglab.org/download/)
+
+2. Open the "RunMe_example.m" program to use the scripts.
+
+    - Run "SourceSpaceFCanalysis_PPS.m" for one participant. 
+
+     ```matlab
+     cfg = []; % this would use the default parameters
+     participantnumber = 2;
+     SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
+     % you can also define the parameters used in the function, like:
+     cfg = [];
+     cfg.foi              = 'theta'; 
+     cfg.fcmethod         = 'wpli';
+     cfg.parcmethod       = 'centroid'; 
+     cfg.age              = 36;
+     cfg.plotarg          = 0;
+     SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
+     ```
+     c. Run the source-space FC analysis for all participants
+     > type ```edit RunAnalysis4All``` in the command window
+     > change the parameters for the SourceSpaceFCanalysis_PPS program from line 31 to 40
+     > type the name of the program in the command window and hit enter
+
+     ```matlab
+     RunAnalysis4All
+     ```
 
 
 
