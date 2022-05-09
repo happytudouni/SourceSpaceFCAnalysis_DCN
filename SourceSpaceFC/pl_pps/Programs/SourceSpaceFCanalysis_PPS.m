@@ -1,5 +1,60 @@
 function [] = SourceSpaceFCanalysis_PPS(cfg, participantnumber)
-% run this program under the "Programs/" directory OR change the paths to local directories accordingly;
+% SourceSpaceFCanalysis_PPS performs source-space functional connectivity analysis.
+% This program was written based on the example data in Fieldtrip preprocessing format.
+% Use as
+%   SourceSpaceFCanalysis_PPS(cfg, participantnumber)
+% Inputs:
+%   cfg: The configuration (structure) that contains various parameters:
+%   cfg.foi: frequency of interest. The following boundaries are arbitrarily defined based on the literature;
+%            They can be changed to other values. Please read Xie et al.(under revision)_DCN for more information;
+%            =  'theta' (run the analysis for the theta band)
+%                   .12mos:[3 6], which means 3 to 6Hz
+%                   .36mos:[3 7], which means 3 to 7Hz
+%            =  'alpha' (defualt)
+%                   .12mos:[5 10]
+%                   .36mos:[6 11]
+%            =  'beta'
+%                   .[11 22]
+%            =  'beta'
+%                   .[22 45]
+%   cfg.fcmethod: functional connectivity method. Our program calls ft_connectivityanalysis;
+%            Thus, the majority of the fc options in Fieldtrip should work. 
+%            =   'wpli'(default)
+%                   .weighted phase lag index 
+%            =   'imag'
+%                   .imaginary part of the coherency 
+%   cfg.atlastype: brain atlas used for segmentation.
+%            Only the LPBA40 atlas was provided as an example for this tutorial.
+%            Please find more atlases from John E. Richards' website: https://jerlab.sc.edu/projects/neurodevelopmental-mri-database/
+%            =   'LPBA'(default)
+%                   .lpba40 brain atlas 
+%   cfg.replacearg: whether to replace the existing output file.
+%            =   0 (default)
+%                   .Do not replace the existing file. Return if the file already exists
+%            =   1 
+%                   .Replace the existing file
+%   cfg.parcmethod: How to parcellate the voxels into ROIs.
+%            =   'centroid' (default)
+%                   .Use the voxels near the centroid for each ROI
+%            =   'average' 
+%                   .Calculate the average across all voxels for each ROI
+%            =   'PCA' 
+%                   .Do PCA with all voxels in the ROI and use the first component;
+%   cfg.methodtype: Source localization inverse solution.
+%            =   'eloreta' (default)
+%                   .Use eLORETA
+%            =   'mne' 
+%                   .Use minimum norm estimation
+%   cfg.gridresolution: Source localization "spatial resolution".
+%            This is also an arbitrary value; however, you would need to re-generate the source models if you use other values;
+%            Please follow this link to create new models https://www.fieldtriptoolbox.org/tutorial/sourcemodel/
+%            =   '6mm' (defualt)
+%   cfg.plotarg: whether do plots for certain steps while the program is running.
+%            =   0 (default)
+%                   .No plot. Thanks.
+%            =   1 
+%                   .I like plots.
+%   participantnumber: an arbitrary participant number. Used for loading and saving the data
 
 %% Define parameters and methods;                   
 if ~isfield(cfg, 'foi'),              cfg.foi              = 'alpha';                 end; foi        = cfg.foi;
@@ -9,10 +64,8 @@ if ~isfield(cfg, 'replacearg'),       cfg.replacearg       = 0;                 
 if ~isfield(cfg, 'parcmethod'),       cfg.parcmethod       = 'centroid';              end; parcmethod = cfg.parcmethod; 
 if ~isfield(cfg, 'methodtype'),       cfg.methodtype       = 'eloreta';               end; methodtype = cfg.methodtype;
 if ~isfield(cfg, 'gridresolution'),   cfg.gridresolution   = '6mm';                   end; gridresolution  = cfg.gridresolution;
-if ~isfield(cfg, 'hztype'),           cfg.hztype           = 1;                       end; hztype  = cfg.hztype;
-if ~isfield(cfg, 'age'),              cfg.age              = 36;                      end; age     = cfg.age;
 if ~isfield(cfg, 'plotarg'),          cfg.plotarg          = 0;                       end; plotarg = cfg.plotarg;
-
+cfg_original = cfg;
 %% Global variables;
 global EEG_FT  sourcedata moments m roitrialdata  
 global filter atlas roivol
@@ -21,6 +74,7 @@ ft_defaults;
 %% Define file names and Load the EEG data
 % The source models are slightly different for children under and above 12 months of age;
 % Specially, for children <= 12 mos their FEM model includes non-myelinated axons, whereas for children > 12 mos the FEM model does not include non-myelinated axons; 
+age = cfg.age;
 if age > 12 
     segmentedtype='segmented'; % FEM model;
 else
@@ -42,10 +96,9 @@ else
 end
 
 % define paths
-filepath = '../Outputs/';
-modelspath  = '../Sourcemodels/';
-eegfilepath =  ['../Data/Age' num2str(age) 'mos/'];
-sourcepath  = '../SourceData/';
+eegfilepath = cfg.eegfilepath;
+filepath    = cfg.filepath;
+modelspath  = cfg.modelspath;
 
 % check if the output matrix already exists;
 outputname = ['Participant ' num2str(participantnumber) ' Age ' num2str(age) ' fcanalysis_' methodtype '_' foi '_' parcmethod '_' gridresolution '_' fcmethod '_' atlastype '.mat'];
@@ -55,7 +108,7 @@ if exist([filepath outputname]) & replacearg == 0;
 end
 
 %load the EEG data; 
-eegfilename = ['Experiment 1 Subject ' num2str(participantnumber) ' Age ' num2str(age) ' Fieldtrip ' num2str(hztype) 'Hz Highpass_New_2s.mat']; 
+eegfilename = cfg.eegfilename;
 load ([eegfilepath eegfilename],'EEG_FT'); 
 % change the data format from preprocessing to timelock format, which makes some of the following analyses easier;
 cfg = [];
@@ -359,4 +412,7 @@ end  % if permutation & strcmp(fcmethod,'wpli')
 disp('Save FC matrices ...');
 save([filepath outputname],'fcmatrix');
 
-
+% you may also save the original cfg structure with all the file names, paths, and parameters;
+% comment out or delete the following two lines if you don't want to save the cfg;
+outputname_cfg = strrep(outputname,'.mat','_cfg.mat');
+save([filepath outputname_cfg],'cfg_original');

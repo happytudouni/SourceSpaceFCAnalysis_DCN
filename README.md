@@ -7,35 +7,84 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
 
 # To use pl_pps, please do the followings
-1. Download the SourceSpaceFC folder from the the pl_pps folder
+1. Download the SourceSpaceFC folder 
+
+    You should see the following files in your folder:
+
+    <img src="/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-09 at 15.01.45.png" alt="Screen Shot 2022-05-09 at 15.01.45" style="zoom:50%;" />
 
     - Go to the "Data" folder. 
         - Example data have already been uploaded to the "Age12mos" and "Age36mos" folders. You should be able to see them once you open the folders. 
         - To download all the data used in the manuscript, open "Data download.md" file, and then you can download the data following the instructions and have the EEG data for different ages saved in the local "Age12mos" and "Age36mos" folders.
-
     - Go to the "Sourcemodels" folder. Download the source models and filters following the instructions in the "Download sourcemodels and efilters.md" document and have the files saved in your local "Sourcemodels" folder.
-    - Make sure to download and install **EEGLAB and Fieldtrip** toolboxes and add them to Matlab search path. We have the programs tested with the following Fieldtrip and EEGLAB versions:
-        - [fieldtrip-20210409 & ](https://www.fieldtriptoolbox.org/download/)
+    - Go to the "Programs" folder. Open or run "RunMe_example.m" as an example for how to use the scripts.
+        - Make sure to download and install **EEGLAB and Fieldtrip** toolboxes and add them to Matlab search path. We have the programs tested with the following Fieldtrip and EEGLAB versions:
+        - [Both fieldtrip-20210409 and fieldtrip-20180415 ](https://www.fieldtriptoolbox.org/download/)
         - [eeglab2021.1](https://eeglab.org/download/)
-
-2. Open the "RunMe_example.m" program to use the scripts.
-
-    - Run "SourceSpaceFCanalysis_PPS.m" for one participant. 
+        - To change the parameters and methods used for source space FC analysis, please see the following scripts as an example. Please type "help SourceSpaceFCanalysis_PPS" in your Matlab command window for more information.
 
      ```matlab
-     cfg = []; % this would use the default parameters
-     participantnumber = 2;
-     SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
-     % you can also define the parameters used in the function, like:
-     cfg = [];
-     cfg.foi              = 'theta'; 
-     cfg.fcmethod         = 'wpli';
-     cfg.parcmethod       = 'centroid'; 
-     cfg.age              = 36;
-     cfg.plotarg          = 0;
-     SourceSpaceFCanalysis_PPS(cfg, participantnumber); 
+         help SourceSpaceFCanalysis_PPS
+     % SourceSpaceFCanalysis_PPS performs source-space functional connectivity analysis.
+     % This program was written based on the example data in Fieldtrip preprocessing format.
+     % Use as
+     %   SourceSpaceFCanalysis_PPS(cfg, participantnumber)
+     % Inputs:
+     %   cfg: The configuration (structure) that contains various parameters:
+     %   cfg.foi: frequency of interest. The following boundaries are arbitrarily defined based on the literature;
+     %            They can be changed to other values. Please read Xie et al.(under revision)_DCN for more information;
+     %            =  'theta' (run the analysis for the theta band)
+     %                   .12mos:[3 6], which means 3 to 6Hz
+     %                   .36mos:[3 7], which means 3 to 7Hz
+     %            =  'alpha' (defualt)
+     %                   .12mos:[5 10]
+     %                   .36mos:[6 11]
+     %            =  'beta'
+     %                   .[11 22]
+     %            =  'beta'
+     %                   .[22 45]
+     %   cfg.fcmethod: functional connectivity method. Our program calls ft_connectivityanalysis;
+     %            Thus, the majority of the fc options in Fieldtrip should work. 
+     %            =   'wpli'(default)
+     %                   .weighted phase lag index 
+     %            =   'imag'
+     %                   .imaginary part of the coherency 
+     %   cfg.atlastype: brain atlas used for segmentation.
+     %            Only the LPBA40 atlas was provided as an example for this tutorial.
+     %            Please find more atlases from John E. Richards' website: https://jerlab.sc.edu/projects/neurodevelopmental-mri-database/
+     %            =   'LPBA'(default)
+     %                   .lpba40 brain atlas 
+     %   cfg.replacearg: whether to replace the existing output file.
+     %            =   0 (default)
+     %                   .Do not replace the existing file. Return if the file already exists
+     %            =   1 
+     %                   .Replace the existing file
+     %   cfg.parcmethod: How to parcellate the voxels into ROIs.
+     %            =   'centroid' (default)
+     %                   .Use the voxels near the centroid for each ROI
+     %            =   'average' 
+     %                   .Calculate the average across all voxels for each ROI
+     %            =   'PCA' 
+     %                   .Do PCA with all voxels in the ROI and use the first component;
+     %   cfg.methodtype: Source localization inverse solution.
+     %            =   'eloreta' (default)
+     %                   .Use eLORETA
+     %            =   'mne' 
+     %                   .Use minimum norm estimation
+     %   cfg.gridresolution: Source localization "spatial resolution".
+     %            This is also an arbitrary value; however, you would need to re-generate the source models if you use other values;
+     %            Please follow this link to create new models https://www.fieldtriptoolbox.org/tutorial/sourcemodel/
+     %            =   '6mm' (defualt)
+     %   cfg.plotarg: whether do plots for certain steps while the program is running.
+     %            =   0 (default)
+     %                   .No plot. Thanks.
+     %            =   1 
+     %                   .I like plots.
+     %   participantnumber: an arbitrary participant number. Used for loading and saving the data.
      ```
-     c. Run the source-space FC analysis for all participants
+
+2. Run the source-space FC analysis for all participants
+
      > type ```edit RunAnalysis4All``` in the command window
      > change the parameters for the SourceSpaceFCanalysis_PPS program from line 31 to 40
      > type the name of the program in the command window and hit enter
