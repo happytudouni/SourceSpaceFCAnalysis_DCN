@@ -11,7 +11,7 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
     You should see the following files in your folder:
 
-    <img src="/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-09 at 15.01.45-2080426.png" alt="Screen Shot 2022-05-09 at 15.01.45" style="zoom:50%;" />
+    ![Screen Shot 2022-05-09 at 15.01.45](/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-09 at 15.01.45-2080515.png)
 
     - Go to the "Data" folder. 
         - Example data have already been uploaded to the "Age12mos" and "Age36mos" folders. You should be able to see them once you open the folders. 
