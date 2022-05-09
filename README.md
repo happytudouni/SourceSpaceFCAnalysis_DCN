@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: upload
+---
+
 These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
 
 # Background
@@ -11,7 +15,7 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
     You should see the following files in your folder:
 
-    ![Screen Shot 2022-05-09 at 15.01.45](/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-09 at 15.01.45-2080515.png)
+    <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h22a0trktuj213y08yaai.jpg" alt="Screen Shot 2022-05-09 at 15.01.45" style="zoom:50%;" />
 
     - Go to the "Data" folder. 
         - Example data have already been uploaded to the "Age12mos" and "Age36mos" folders. You should be able to see them once you open the folders. 
