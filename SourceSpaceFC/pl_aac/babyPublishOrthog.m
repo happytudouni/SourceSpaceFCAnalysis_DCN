@@ -13,7 +13,7 @@
 clearvars
 close all
 clc
-
+global folderBase
 % set up the eeglab default paths
 eeglab;close;
 %% 1. Generate unconstrained kernels in Brainstorm for each age group
@@ -55,7 +55,8 @@ load(fullfile(folderBase,'ADMIN','masterFrequencyBandsInfantsToddlers5K.mat'),'b
 % declare the window duration coefficient
 threshWindowCoeff = 10;
 
-bands = {'THETA','ALPHA','BETA','GAMMA'};
+% bands = {'THETA','ALPHA','BETA','GAMMA'};
+bands = {'THETA','ALPHA'};
 for iBand=1:length(bands)
    band = bands{iBand};
    for iFile=1:height(D)
@@ -114,10 +115,11 @@ end
 disp('section 2 complete')
 
 %% 3. Aggregate results
-
+% clear the variables from the Workspace because some are big in size.
 clearvars
 clc
-
+% the folderBase is a global variable that will not be cleared 
+global folderBase
 folderOPEC = fullfile(folderBase,'PREPROC','OPEC');
 
 D = struct2table(dir(folderOPEC));
@@ -126,9 +128,13 @@ D.PathAndName = fullfile(D.folder,D.name);
 D.name = extractBefore(D.name,'.');
 D12 = D(startsWith(D.name,'A12'),:);
 D36 = D(startsWith(D.name,'A36'),:);
+% remove the file names with '_PRUNED' because they just .mat that contains the preprocessing ICA information;
+D12(contains(D12.name,'PRUNED'),:) = [];
+D36(contains(D36.name,'PRUNED'),:) = [];
 clearvars D
 
-bands = {'THETA','ALPHA','BETA','GAMMA'};
+% bands = {'THETA','ALPHA','BETA','GAMMA'};
+bands = {'THETA','ALPHA'};
 RAagg12 = single(NaN(5000,5000));
 RAagg12 = repmat(RAagg12,[1,1,height(D12),length(bands)]);
 RAagg36 = single(NaN(5000,5000));

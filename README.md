@@ -97,19 +97,26 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
 # To use pl_aac, please do the followings
 
-1. Download all the files (.mat & .m) in the pl_aac folder.
-2. Create a folder with an arbitrary name (e.g., 'pl_aac') and a few subfolders as shown in the following picture:
+1. Download the "SourceSpaceFC" folder. You should be able to find the following folders in the "pl_aac" folder.
 
-<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyaqbo972aj30as09a3yk.jpg" alt="Screen Shot 2022-01-12 at 11.27.14 AM" style="zoom:50%;" />
+   <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyaqbo972aj30as09a3yk.jpg" alt="Screen Shot 2022-01-12 at 11.27.14 AM" style="zoom:50%;" />
 
-- Save the kernels and .mat files downloaded from 'Sourcemodels/pl_aac_sourcemodels/' to the 	'ADMIN' folder, and download the preprocessed data from "pl_aac_preprocessed" and save them to the 'FINAL' and 'OPEC' folders.
+   - Save the kernels and .mat files downloaded from 'Sourcemodels/pl_aac_sourcemodels/' to the 	'ADMIN' folder, and download the preprocessed data from "pl_aac_preprocessed" and save them to the 'FINAL' and 'OPEC' folders.
+
+2. Change directory (cd) to the SourceSpaceFC folder in MATLAB, and then "addpath" for the "pl_aac" folder. For example:
+
+   ```matlab
+   SourceSpaceFC_path = '/Users/wanzexie/Documents/GitHub/SourceSpaceFCAnalysis_DCN/SourceSpaceFC/';
+   cd(SourceSpaceFC_path);
+   addpath('pl_aac');
+   ```
+
+
 
 3. The Matlab code should be executed as follows: 
    a. Make sure **Brainstorm** is installed and added to the search path because pl_aac relies on functions in Brainstorm.
 
-   b. on Line 42 in ```babyPublishOrthog.m```, define the 'folderBase' as the directory of the 'pl_aac' folder.
-
-   c. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
+   b. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
 
 - Note: The later connectivity steps between pl_aac and pl_pps are not dependent on the earlier source differences.
 - Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program.  
