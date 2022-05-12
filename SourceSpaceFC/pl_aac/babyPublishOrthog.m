@@ -1,14 +1,13 @@
-%% 0. Preamble.
-
 % This script describes the analysis procedures to produce frequency band-limited connectivity matrices
 % from orthogonalized power envelopes derived from EEG. This script is annotated with comments throughout
 % to aid in clarity.
-
 % Conventions:
 % functions prefixed by RTT_ are custom functions
 % variables prefixed by thresh are values that are manually set specifically for these analyses
 % fields in the EEG structure beginning with a capital letter are custom fields (ex. EEG.ChansBad is a custom field and
 % EEG.data is a standard field)
+
+%% 0. Preamble.
 
 clearvars
 close all
@@ -35,11 +34,8 @@ eeglab;close;
 
 %% 2. Calculate directional connectivity matrices from orthogonalized power envelopes
 
-clearvars
-clc
-
 % user-defined base directory
-folderBase = 'pl_aac/';
+folderBase = cd; % current directory
 
 D = struct2table(dir(fullfile(folderBase,'PREPROC','FINAL')));
 D = D(~D.isdir,:);

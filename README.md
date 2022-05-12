@@ -101,25 +101,34 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyaqbo972aj30as09a3yk.jpg" alt="Screen Shot 2022-01-12 at 11.27.14 AM" style="zoom:50%;" />
 
-   - Save the kernels and .mat files downloaded from 'Sourcemodels/pl_aac_sourcemodels/' to the 	'ADMIN' folder, and download the preprocessed data from "pl_aac_preprocessed" and save them to the 'FINAL' and 'OPEC' folders.
+   - The kernels and .mat files are saved in the 'ADMIN' folder, and the preprocessed data are saved in the FINAL' and 'OPEC' folders.
 
-2. Change directory (cd) to the SourceSpaceFC folder in MATLAB, and then "addpath" for the "pl_aac" folder. For example:
+2. Change directory (cd) to the "pl_aac" folder. For example:
 
    ```matlab
-   SourceSpaceFC_path = '/Users/wanzexie/Documents/GitHub/SourceSpaceFCAnalysis_DCN/SourceSpaceFC/';
-   cd(SourceSpaceFC_path);
-   addpath('pl_aac');
+   pl_aac_path = '/Users/wanzexie/Documents/GitHub/SourceSpaceFCAnalysis_DCN/SourceSpaceFC/pl_aac';
+   cd(pl_aac_path);
    ```
-
-
 
 3. The Matlab code should be executed as follows: 
    a. Make sure **Brainstorm** is installed and added to the search path because pl_aac relies on functions in Brainstorm.
 
    b. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
+   
+   - Type "help babyPublishOrthog" in the command window for more information. 
+   
+   - The first section of this program includes instructions on how to create the source models/kernels in Brainstorm **using child brain templates** (O'Reilly et al., 2021; Richards & Xie, 2015).  Please see below. We also made pictures showing the steps of creating models in Brainstorm. They can be downloaded from the **Sourcemodels/pl_aac_sourcemodels/** folder.
+   
+     <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h25fw9avd6j216m0fy7ad.jpg" alt="Screen Shot 2022-05-12 at 11.02.55" style="zoom:80%;" />
 
 - Note: The later connectivity steps between pl_aac and pl_pps are not dependent on the earlier source differences.
+
+- We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets uploaded on an MacBook Pro laptop having the following system configuration. It took >8 hours. So please be patient if you are not running the program on a workstation, or first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
+
+  <img src="/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-12 at 11.06.33.png" alt="Screen Shot 2022-05-12 at 11.06.33" style="zoom:50%;" />
+
 - Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program.  
+
 - Note: The Signal Processing Toolbox (SPT) of Matlab is recommended to be installed to ensure all the programs would run smoothly. The functions in Fieldtrip and Brainstorm might use functions in the SPT, and the customized programs written by us also adopt SPT functions, e.g., the "bandpass.m" used to filter data in "SourceSpaceFCAnalysis_AAC" is a SPT function.  
 
 # Preprocessing programs
@@ -136,7 +145,7 @@ The brain FC figures depicting the results from using pl_pps were made with [Sur
 3. Load a node file, e.g., File --> Open --> BrainNet --> LPBA40.node
 4. Load an edge file, e.g., File --> Open --> BrainNet --> LPBA40.edge
 
-The brain FC figures for pl_aac were made with **Brainstorm**
+The brain FC figures for pl_aac were made in **Brainstorm**
 
 # Intermediate outputs 
 
