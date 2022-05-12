@@ -55,8 +55,7 @@ load(fullfile(folderBase,'ADMIN','masterFrequencyBandsInfantsToddlers5K.mat'),'b
 % declare the window duration coefficient
 threshWindowCoeff = 10;
 
-% bands = {'THETA','ALPHA','BETA','GAMMA'};
-bands = {'THETA','ALPHA'};
+bands = {'THETA','ALPHA','BETA','GAMMA'};
 for iBand=1:length(bands)
    band = bands{iBand};
    for iFile=1:height(D)
@@ -133,8 +132,7 @@ D12(contains(D12.name,'PRUNED'),:) = [];
 D36(contains(D36.name,'PRUNED'),:) = [];
 clearvars D
 
-% bands = {'THETA','ALPHA','BETA','GAMMA'};
-bands = {'THETA','ALPHA'};
+bands = {'THETA','ALPHA','BETA','GAMMA'};
 RAagg12 = single(NaN(5000,5000));
 RAagg12 = repmat(RAagg12,[1,1,height(D12),length(bands)]);
 RAagg36 = single(NaN(5000,5000));
