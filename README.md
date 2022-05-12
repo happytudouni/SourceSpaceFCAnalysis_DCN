@@ -125,7 +125,7 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
 - We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets uploaded on an MacBook Pro laptop having the following system configuration. It took >8 hours. So please be patient if you are not running the program on a workstation, or first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
 
-  <img src="/Users/wanzexie/Documents/Typora/Image/Screen Shot 2022-05-12 at 11.06.33.png" alt="Screen Shot 2022-05-12 at 11.06.33" style="zoom:50%;" />
+  <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h25ksy275ij20py0bejs8.jpg" alt="Screen Shot 2022-05-12 at 11.06.33" style="zoom:50%;" />
 
 - Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program.  
 
@@ -133,9 +133,11 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
 # Preprocessing programs
 
-In this tutorial we are also sharing the preprocessing programs (mostly automatic).
-1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing_pps.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we modified from the ones used for Xie et al.(2019), BMC Medicine. The parameters in these programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing.
-2. The proprocessing program used for the pl_aac pipeline was named as ```babyPublishPreProc```. This program was written based on the preprocessing procedures in Toll et al. (2020), AJP. You may also reach out to RT for questions about this program. 
+In this tutorial we are also sharing our preprocessing programs (primarily automatic).  Since the purpose of the paper is not about data preprocessing, the preprocessing programs we shared might need minor adjustments before they can run smoothly. 
+1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing_pps.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we modified based on those used for Xie et al.(2019), *BMC Medicine*. The parameters in these two programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing that you would like to discuss. 
+   - A few functions from FASTER, ADJUST, and SASICA are called by the programs.
+
+2. The proprocessing program used for the pl_aac pipeline was named as ```babyPublishPreProc```. This program was written based on the preprocessing procedures in Toll et al. (2020), *AJP*. You may also reach out to RT for questions about these procedures. 
 
 # Plotting
 
