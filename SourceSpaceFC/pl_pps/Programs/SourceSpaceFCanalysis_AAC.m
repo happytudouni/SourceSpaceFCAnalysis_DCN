@@ -1,5 +1,8 @@
 function [] = SourceSpaceFCanalysis_AAC(cfg, participantnumber);
-% run this program under the "Programs/" directory OR change the paths to local directories accordingly;
+% This program will run source-space FC analysis using orthoganolized 
+% amplitude to amplitude correlation (AAC).
+% It is modified based on SourceSpaceFCanalysis_PPS, and please type
+% "help SourceSpaceFCanalysis_PPS" for the description of the parameters.
 
 %% Define parameters and methods;                   
 if ~isfield(cfg, 'foi'),              cfg.foi              = 'alpha';                 end; foi        = cfg.foi;
@@ -9,15 +12,15 @@ if ~isfield(cfg, 'replace'),          cfg.replacearg       = 0;                 
 if ~isfield(cfg, 'parcmethod'),       cfg.parcmethod       = 'average';               end; parcmethod = cfg.parcmethod; 
 if ~isfield(cfg, 'methodtype'),       cfg.methodtype       = 'eloreta';               end; methodtype = cfg.methodtype;
 if ~isfield(cfg, 'gridresolution'),   cfg.gridresolution   = '6mm';                   end; gridresolution  = cfg.gridresolution;
-if ~isfield(cfg, 'hztype'),           cfg.hztype           = 1;                       end; hztype  = cfg.hztype;
-if ~isfield(cfg, 'age'),              cfg.age              = 36;                      end; age     = cfg.age;
 if ~isfield(cfg, 'plotarg'),          cfg.plotarg          = 0;                       end; plotarg = cfg.plotarg;
+cfg_original = cfg;
 %% Global variables;
 global EEG_FT  sourcedata moments m roitrialdata  
 global filter atlas roivol
 ft_defaults;
 
-%% Load the subjectsmatrix
+%% Define file names and Load the EEG data
+age = cfg.age;
 if age > 12 %
     segmentedtype='segmented'; % FEM model;
 else
@@ -36,12 +39,11 @@ elseif mrinumber>100
 else 
     mristring =  ['00' num2str(mrinumber)];
 end
+
 % define paths
-% run this program under the "Programs/" directory or change the paths to local directories accordingly;
-filepath = '../Outputs/';
-modelspath  = '../Sourcemodels/';
-eegfilepath =  ['../Data/RAW/Age' num2str(age) 'mos/'];
-sourcepath  = '../SourceData/';
+eegfilepath = cfg.eegfilepath;
+filepath    = cfg.filepath;
+modelspath  = cfg.modelspath;
 
 % check if the output matrix already exists;
 outputname = ['Participant ' num2str(participantnumber) ' Age ' num2str(age) ' fcanalysis_' methodtype '_' foi '_' parcmethod '_' gridresolution '_' fcmethod '_' atlastype '.mat'];
@@ -50,8 +52,8 @@ if exist([filepath outputname]) & replacearg == 0;
     return
 end
 
-%load ICA Edited EEG data; 
-eegfilename = ['Experiment 1 Subject ' num2str(participantnumber) ' Age ' num2str(age) ' Fieldtrip ' num2str(hztype) 'Hz Highpass_New_2s.mat']; 
+%load the EEG data; 
+eegfilename = cfg.eegfilename;
 load ([eegfilepath eegfilename],'EEG_FT'); 
 %change the FT format from preprocessing to timelock format, which makes some of the following analyses easier;
 cfg = [];
@@ -104,12 +106,7 @@ end
 
 catdata_filt = catdata_filt';
 
-
 %% Cortical source reconstruction;
-sourcefilename = ['Participant ' num2str(participantnumber) ' Age ' num2str(age) '_sourcedata_' methodtype '_' foi '.mat'];
-if exist([sourcepath sourcefilename])
-    load ([sourcepath sourcefilename],'sourcedata')
-else % do source reconstruction
 mrifieldtripfoldername =  modelspath;
 % If use eLORETA then there is no need to do source analysis from the scratch. Instead, use the filter created for each average MRI;
 % However, if use beamforming or MNE then the source analysis needs to be conducted for each dataset because
@@ -211,8 +208,6 @@ if savesourcedata % these sourcedata are big in size;
     save([sourcepath sourcefilename],'sourcedata');
 else
 end
-
-end % end of source reconstruction
 
 %% Hilbert transformation
 tic
@@ -330,3 +325,8 @@ disp('Save source data & FC matrices ...');
 fcmatrix.Rp = Rp;
 fcmatrix.Ro = Ro;
 save([filepath outputname],'fcmatrix');
+
+% you may also save the original cfg structure with all the file names, paths, and parameters;
+% comment out or delete the following two lines if you don't want to save the cfg;
+outputname_cfg = strrep(outputname,'.mat','_cfg.mat');
+save([filepath outputname_cfg],'cfg_original');

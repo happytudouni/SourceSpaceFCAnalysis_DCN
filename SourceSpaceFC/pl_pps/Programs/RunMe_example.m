@@ -26,6 +26,7 @@ cfg.age = 36;
 cfg.eegfilepath = fullfile(folderBase,'Data',['Age' num2str(cfg.age) 'mos/']);
 cfg.filepath    = fullfile(folderBase,'Outputs/'); % output file path;
 cfg.modelspath  = fullfile(folderBase,'Sourcemodels/');
+cfg.modelspath  = '/Users/wanzexie/Dropbox/Collaboration/SourceSpaceFC/Sourcemodels/';
 % define the name of the eeg input file
 eegfilename = ['Experiment 1 Subject ' num2str(participantnumber) ' Age ' num2str(cfg.age) ' Fieldtrip 1Hz Highpass_New_2s.mat']; 
 cfg.eegfilename = eegfilename;
@@ -33,4 +34,12 @@ cfg.eegfilename = eegfilename;
 % The SourceSpaceFC_PPS program should also work with data in other format, as long as it can be read into Fieldtrip.
 
 %% Main
-SourceSpaceFCanalysis_PPS(cfg, participantnumber);
+% phase-to-phase synchrony
+fois = {'theta','alpha','beta','gamma'};
+for i = 1:length(fois)
+    cfg.foi = fois{i};
+    % phase-to-phase synchrony
+    SourceSpaceFCanalysis_PPS(cfg, participantnumber);
+    % orthogonalized amplitude-to-amplitude correlation
+    SourceSpaceFCanalysis_AAC(cfg, participantnumber);
+end

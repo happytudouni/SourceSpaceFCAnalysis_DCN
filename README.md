@@ -83,12 +83,11 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
      %   participantnumber: an arbitrary participant number. Used for loading and saving the data.
      ```
 
-2. Run the source-space FC analysis for all participants
+2. Run the source-space FC analysis for all participants and frequency bands
 
      > type ```edit RunAnalysis4All``` in the command window
-     > change the parameters for the SourceSpaceFCanalysis_PPS program from line 31 to 40
-     > type the name of the program in the command window and hit enter
-
+     > This program will run the analysis for all frequency bands and participants in different age groups.
+     
      ```matlab
      RunAnalysis4All
      ```
