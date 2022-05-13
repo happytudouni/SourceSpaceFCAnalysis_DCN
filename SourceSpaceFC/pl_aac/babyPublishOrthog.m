@@ -12,7 +12,6 @@
 clearvars
 close all
 clc
-global folderBase
 % set up the eeglab default paths
 eeglab;close;
 %% 1. Generate unconstrained kernels in Brainstorm for each age group
@@ -111,11 +110,8 @@ end
 disp('section 2 complete')
 
 %% 3. Aggregate results
-% clear the variables from the Workspace because some are big in size.
-clearvars
 clc
-% the folderBase is a global variable that will not be cleared 
-global folderBase
+
 folderOPEC = fullfile(folderBase,'PREPROC','OPEC');
 
 D = struct2table(dir(folderOPEC));
