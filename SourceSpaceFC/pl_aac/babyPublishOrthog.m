@@ -38,7 +38,8 @@ eeglab;close;
 folderBase = cd; % current directory
 
 D = struct2table(dir(fullfile(folderBase,'PREPROC','FINAL')));
-D = D(~D.isdir,:);
+% D = D(~D.isdir,:);
+D = D(contains(D.name,'set'),:);
 D.PathAndName = fullfile(D.folder,D.name);
 
 D.AgeSubject = extractBefore(D.name,'.set');
