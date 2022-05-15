@@ -102,7 +102,7 @@ for iBand=1:length(bands)
          else
             eval(sprintf('save(''%s'',''*%s'',''-append'')',D.PathAndNameNewOPEC{iFile},extractAfter(varName,'_')))
          end
-         clearvars -except band* D KU* thresh* i*
+         clearvars -except band* D KU* thresh* i* folderBase
       end
    end
 end
@@ -110,7 +110,6 @@ end
 disp('section 2 complete')
 
 %% 3. Aggregate results
-clc
 
 folderOPEC = fullfile(folderBase,'PREPROC','OPEC');
 
