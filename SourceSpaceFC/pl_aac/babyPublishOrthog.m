@@ -110,7 +110,7 @@ end
 disp('section 2 complete')
 
 %% 3. Aggregate results
-
+folderBase = cd;
 folderOPEC = fullfile(folderBase,'PREPROC','OPEC');
 
 D = struct2table(dir(folderOPEC));
