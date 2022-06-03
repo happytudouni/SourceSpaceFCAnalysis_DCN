@@ -67,9 +67,8 @@ if ~isfield(cfg, 'gridresolution'),   cfg.gridresolution   = '6mm';             
 if ~isfield(cfg, 'plotarg'),          cfg.plotarg          = 0;                       end; plotarg = cfg.plotarg;
 cfg_original = cfg;
 %% Global variables;
-global EEG_FT  sourcedata moments m roitrialdata  
-global filter atlas roivol
-ft_defaults;
+global EEG
+ft_defaults; eeglab;close all
 
 %% Define file names and Load the EEG data
 % The source models are slightly different for children under and above 12 months of age;

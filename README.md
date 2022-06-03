@@ -1,10 +1,8 @@
 These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
 
 # Background
-In the current tutorial and manuscript we aimed to demonstrate recently developed pipelines to conduct EEG FC analysis in the source space focusing on phase-phase synchrony (PPS) (Xie et al., 2019a, b, Dev Sci and BMC Med) and and amplitude-amplitude correlation (AAC) (Toll et al., 2020, AMJ; Zhang et al., 2021, Nat Biomed Eng) respectively. The two pipelines were developed by two different research labs -- the [Nelson Lab](https://www.childrenshospital.org/research/labs/nelson-laboratory) at Harvard and the [Etkin Lab](https://www.etkinlab.stanford.edu/) at Stanford. You may also find the information about the first and second authors of the current tutorial at [WX at PKU](https://www.psy.pku.edu.cn/english/people/faculty/professor/wanzexie/index.htm) (wanze.xie@pku.edu.cn) and [RT at UTSW Med Center](https://profiles.utsouthwestern.edu/profile/185228/russell-toll.html) ([Russell.Toll@UTSouthwestern.edu](mailto:Russell.Toll@UTSouthwestern.edu)). 
+In the current tutorial and manuscript we aimed to demonstrate recently developed pipelines to conduct EEG FC analysis in the source space focusing on phase-phase synchrony (PPS) (Xie et al., 2019a, b, Dev Sci and BMC Med) and and amplitude-amplitude correlation (AAC) (Toll et al., 2020, AMJ; Zhang et al., 2021, Nat Biomed Eng) respectively. The two pipelines were developed by two different research labs -- the [Nelson Lab](https://www.childrenshospital.org/research/labs/nelson-laboratory) at Harvard and the [Etkin Lab](https://neuroscience.stanford.edu/people/amit-etkin-md-phd) at Stanford. You may also find the information about the first and second authors of the current tutorial at [WX at PKU](https://www.psy.pku.edu.cn/english/people/faculty/professor/wanzexie/index.htm) (wanze.xie@pku.edu.cn) and [RT at UTSW Med Center](https://profiles.utsouthwestern.edu/profile/185228/russell-toll.html) ([Russell.Toll@UTSouthwestern.edu](mailto:Russell.Toll@UTSouthwestern.edu)). 
 For the sake of brevity, the two pipelines were referred to as the “pl_pps” and “pl_aac” in the following sections. 
-
-
 
 # To use pl_pps, please do the followings
 1. Download the SourceSpaceFC folder 
