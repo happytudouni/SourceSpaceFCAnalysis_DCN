@@ -120,7 +120,7 @@ For the sake of brevity, the two pipelines were referred to as  “pl_pps” and
 
 - Note: The later connectivity steps between pl_aac and pl_pps are not dependent on the earlier source differences.
 
-- We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets on an MacBook Pro laptop that has the following system configuration. It took about 8 hours. So please be patient if you are not running the program on a workstation. An alternative is to first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
+- We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets on a MacBook Pro laptop that has the following system configuration. It took about 8 hours. So please be patient if you are not running the program on a workstation. An alternative is to first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
 
   <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h25ksy275ij20py0bejs8.jpg" alt="Screen Shot 2022-05-12 at 11.06.33" style="zoom:50%;" />
 
