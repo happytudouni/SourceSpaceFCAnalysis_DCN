@@ -1,8 +1,8 @@
-These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In revision). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
+These scripts and the EEG Data are part of Xie, W., Toll, R., & Nelson, C.A. (In press). EEG Functional Connectivity Analysis in the Source Space. Developmental Cognitive Neuroscience. 
 
 # Background
-In the current tutorial and manuscript we aimed to demonstrate recently developed pipelines to conduct EEG FC analysis in the source space focusing on phase-phase synchrony (PPS) (Xie et al., 2019a, b, Dev Sci and BMC Med) and and amplitude-amplitude correlation (AAC) (Toll et al., 2020, AMJ; Zhang et al., 2021, Nat Biomed Eng) respectively. The two pipelines were developed by two different research labs -- the [Nelson Lab](https://www.childrenshospital.org/research/labs/nelson-laboratory) at Harvard and the [Etkin Lab](https://neuroscience.stanford.edu/people/amit-etkin-md-phd) at Stanford. You may also find the information about the first and second authors of the current tutorial at [WX at PKU](https://www.psy.pku.edu.cn/english/people/faculty/professor/wanzexie/index.htm) (wanze.xie@pku.edu.cn) and [RT at UTSW Med Center](https://profiles.utsouthwestern.edu/profile/185228/russell-toll.html) ([Russell.Toll@UTSouthwestern.edu](mailto:Russell.Toll@UTSouthwestern.edu)). 
-For the sake of brevity, the two pipelines were referred to as the “pl_pps” and “pl_aac” in the following sections. 
+In the current tutorial and manuscript we aimed to demonstrate recently developed pipelines to conduct EEG FC analysis in the source space focusing on phase-phase synchrony (PPS) (Xie et al., 2019a, b, *Dev Sci* and *BMC Med*) and amplitude-amplitude correlation (AAC) (Toll et al., 2020, *AMJ*; Zhang et al., 2021, *Nat Biomed Eng*) respectively. The two pipelines were developed by two different research labs -- the [Nelson Lab](https://www.childrenshospital.org/research/labs/nelson-laboratory) at Harvard and the [Etkin Lab](https://neuroscience.stanford.edu/people/amit-etkin-md-phd) at Stanford. You may also find the information about the first and second authors of the current tutorial at [WX at PKU](https://www.psy.pku.edu.cn/english/people/faculty/professor/wanzexie/index.htm) (wanze.xie@pku.edu.cn) and [RT at UTSW Med Center](https://profiles.utsouthwestern.edu/profile/185228/russell-toll.html) ([Russell.Toll@UTSouthwestern.edu](mailto:Russell.Toll@UTSouthwestern.edu)). 
+For the sake of brevity, the two pipelines were referred to as  “pl_pps” and “pl_aac” in the following sections. 
 
 # To use pl_pps, please do the followings
 1. Download the SourceSpaceFC folder 
@@ -13,10 +13,10 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
 
     - Go to the "Data" folder. 
         - Example data have already been uploaded to the "Age12mos" and "Age36mos" folders. You should be able to see them once you open the folders. 
-        - To download all the data used in the manuscript, open "Data download.md" file, and then you can download the data following the instructions and have the EEG data for different ages saved in the local "Age12mos" and "Age36mos" folders.
+        - To download all the data used in the manuscript, open the "Data download.md" file and then  download the data following the instructions. Please save the EEG data for different ages to the  "Age12mos" and "Age36mos" folders respectively.
     - Go to the "Sourcemodels" folder. Download the source models and filters following the instructions in the "Download sourcemodels and efilters.md" document and have the files saved in your local "Sourcemodels" folder.
-    - Go to the "Programs" folder. Open or run "RunMe_example.m" as an example for how to use the scripts.
-        - Make sure to download and install **EEGLAB and Fieldtrip** toolboxes and add them to Matlab search path. We have the programs tested with the following Fieldtrip and EEGLAB versions:
+    - Go to the "Programs" folder. Open or run "RunMe_example.m" in Matlab as an example for how to use the scripts.
+        - Please download and install **EEGLAB and Fieldtrip** toolboxes and add them to Matlab search path before running the programs. The recent EEGLAB and Fieldtrip versions (e.g., after 2018) should work. We have the programs tested with the following Fieldtrip and EEGLAB versions:
         - [Both fieldtrip-20210409 and fieldtrip-20180415 ](https://www.fieldtriptoolbox.org/download/)
         - [eeglab2021.1](https://eeglab.org/download/)
         - To change the parameters and methods used for source space FC analysis, please see the following scripts as an example. Please type "help SourceSpaceFCanalysis_PPS" in your Matlab command window for more information.
@@ -81,7 +81,7 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
      %   participantnumber: an arbitrary participant number. Used for loading and saving the data.
      ```
 
-2. Run the source-space FC analysis for all participants and frequency bands
+2. Optional: Run the source-space FC analysis for all participants and frequency bands
 
      > type ```edit RunAnalysis4All``` in the command window
      > This program will run the analysis for all frequency bands and participants in different age groups.
@@ -108,50 +108,52 @@ For the sake of brevity, the two pipelines were referred to as the “pl_pps” 
    ```
 
 3. The Matlab code should be executed as follows: 
-   a. Make sure **Brainstorm** is installed and added to the search path because pl_aac relies on functions in Brainstorm.
+   a. Please make sure **Brainstorm** is installed and added to the search path because pl_aac adopts a few functions in Brainstorm.
 
    b. Run the ```babyPublishOrthog.m``` by typing its name ```babyPublishOrthog``` in the command window. 
    
-   - Type "help babyPublishOrthog" in the command window for more information. 
+   - Type "help babyPublishOrthog" in the command window for more information.  Please see below. 
    
-   - The first section of this program includes instructions on how to create the source models/kernels in Brainstorm **using child brain templates** (O'Reilly et al., 2021; Richards & Xie, 2015).  Please see below. We also made pictures showing the steps of creating models in Brainstorm. They can be downloaded from the **Sourcemodels/pl_aac_sourcemodels/** folder.
+   - The first section of this program includes instructions on how to create the source models/kernels in Brainstorm **using child brain templates** (O'Reilly et al., 2021, *NeuroImage*; Richards & Xie, 2015, *Advances in Child Dev and Beh*). We also made pictures showing the steps to create source/head models in Brainstorm. They can be downloaded from the **Sourcemodels/pl_aac_sourcemodels/** folder.
    
      <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h25fw9avd6j216m0fy7ad.jpg" alt="Screen Shot 2022-05-12 at 11.02.55" style="zoom:80%;" />
 
 - Note: The later connectivity steps between pl_aac and pl_pps are not dependent on the earlier source differences.
 
-- We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets uploaded on an MacBook Pro laptop having the following system configuration. It took >8 hours. So please be patient if you are not running the program on a workstation, or first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
+- We externally have the ``` babyPublishOrthog.m ``` program tested with the 4 example datasets on an MacBook Pro laptop that has the following system configuration. It took about 8 hours. So please be patient if you are not running the program on a workstation. An alternative is to first try the program with one frequency band: on lines 54 and 131 change "bands = {'THETA','ALPHA','BETA','GAMMA'};" to "bands = {THETA};".
 
   <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h25ksy275ij20py0bejs8.jpg" alt="Screen Shot 2022-05-12 at 11.06.33" style="zoom:50%;" />
 
-- Note: We also provide a program "SourceSpaceFCAnalysis_AAC.m" to calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` was written for this purpose, and it is called by the "SourceSpaceFCAnalysis_AAC" program.  
+- Note: We also provide a program  ```SourceSpaceFCAnalysis_AAC.m``` that will calculate orthogonalized power correlation (i.e., AAC) with the head models and functions used in pl_pps (e.g., FEM model and Fieldtrip function). The ```OrthogonalPowCorr.m``` (called by SourceSpaceFCAnalysis_AAC) was written for this purpose.  
 
-- Note: The Signal Processing Toolbox (SPT) of Matlab is recommended to be installed to ensure all the programs would run smoothly. The functions in Fieldtrip and Brainstorm might use functions in the SPT, and the customized programs written by us also adopt SPT functions, e.g., the "bandpass.m" used to filter data in "SourceSpaceFCAnalysis_AAC" is a SPT function.  
+- Note: The Signal Processing Toolbox (SPT) of Matlab is recommended to be installed to ensure all the programs would run smoothly. The functions in Fieldtrip and Brainstorm might use functions in the SPT, and our customized scripts also adopt SPT functions, e.g., the "bandpass.m" used to filter data in "SourceSpaceFCAnalysis_AAC" is a SPT function.  
 
 # Preprocessing programs
 
 In this tutorial we are also sharing our preprocessing programs (primarily automatic).  Since the purpose of the paper is not about data preprocessing, the preprocessing programs we shared might need minor adjustments before they can run smoothly. 
-1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing_pps.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we modified based on those used for Xie et al.(2019), *BMC Medicine*. The parameters in these two programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing that you would like to discuss. 
+1. The preprocessing programs used for the pl_pps pipeline were saved in the pl_pps_preproc folder: ```BaselineDataProcessing_pps.m``` and ```DefineArtificialICAs_AdjustAndSASICA.m```. These are the programs we modified based on those used for Xie et al.(2019), *BMC Medicine*. The parameters in these two programs can be tweaked, and please email WX (wanze.xie@pku.edu.cn) if you have questions about pediatric EEG data preprocessing. 
    - A few functions from FASTER, ADJUST, and SASICA are called by the programs.
 
 2. The proprocessing program used for the pl_aac pipeline was named as ```babyPublishPreProc```. This program was written based on the preprocessing procedures in Toll et al. (2020), *AJP*. You may also reach out to RT for questions about these procedures. 
 
 # Plotting
 
-The brain FC figures depicting the results from using pl_pps were made with [Surf Ice](https://www.nitrc.org/projects/surfice/) software. 
-1. Download and install Surf Ice with the link above. 
+The brain FC figures depicting the results from pl_pps were made with the [Surf Ice](https://www.nitrc.org/projects/surfice/) software. 
+1. Download and install Surf Ice using the link above. 
 2. Load a brain image, e.g., "MNI152_2009" by clicking on File --> Open --> Surf Ice --> sample --> mni152_2009.mz3
 3. Load a node file, e.g., File --> Open --> BrainNet --> LPBA40.node
 4. Load an edge file, e.g., File --> Open --> BrainNet --> LPBA40.edge
 
-The brain FC figures for pl_aac were made in **Brainstorm**
+
+
+The brain FC figures for pl_aac were manually created in **Brainstorm**.
 
 # Intermediate outputs 
 
-In this section, we use one participant's data as an example to show the some of the intermediate outputs from the SourceSpaceFCAnalysis_PPS.m. program.
+In this section, we demonstrate some of the intermediate outputs from ```SourceSpaceFCAnalysis_PPS.m``` with one participant's data.
 1. Load the EEG_FT data and run ft_timelockanalysis to change the format of the data from "preprocessing" to "timelock".
 ```matlab
-line 57 to 64
+line 111ff 
 %load the EEG data 
 eegfilename = ['Experiment 1 ...']; 
 load ([eegfilepath eegfilename],'EEG_FT'); 
@@ -167,7 +169,7 @@ EEG_FT has the following structure.
 
 2. Cortical source reconstruction --> "sourcedata" that has the following structure
 ```matlab
-from line 153 to line 173
+from line 205ff
 % The start of the source reconstructure
 tic;
 disp('Source analysis starts...');
@@ -193,8 +195,8 @@ disp(['The Source analysis took ' num2str(analysistime) 's']);
 <img src="https://user-images.githubusercontent.com/45924665/147401633-9cb312c8-c5a4-468c-b90a-6c784dd79576.png" alt="image" style="zoom: 67%;" />
 
 3. Parcellation of the dipoles across the brain into ROIs -->  "roitrialdata" that has the following structure
-```
-line 175 to line 273
+```matlab
+line 227 to line 325
 ```
 <img src="https://user-images.githubusercontent.com/45924665/147401744-6dcbee45-63a9-4f0c-a53e-d690470636e1.png" style="zoom:50%;" />
 
@@ -202,7 +204,7 @@ line 175 to line 273
 
 4. Frequency analysis of the source-space ROI data --> "EEG_Freq" that has the following structure
 ```matlab
-line 295 to line 303
+line 347ff
 %% Frequency analysis
     % A few options for cfg.method in Fieldtrip: {'coh', 'csd', 'wpli', 'wpli_debiased', 'plv','imag'}
         cfg            = [];
@@ -217,7 +219,7 @@ line 295 to line 303
 
 5. Functional connectivity analysis --> "source_conn" that has the following structure
 ```matlab
-line 305 to line 312
+line 357ff 
 %% FC analysis
         cfg = [];
         F;
