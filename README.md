@@ -148,7 +148,7 @@ The brain FC figures depicting the results from pl_pps were made with the [Surf 
 
 The brain FC figures for pl_aac were manually created in **Brainstorm**.
 
-1. A document that describes the plotting procedure in Brainstorm has been uploaded to the updated "pl_aac" folder on July-24-2022. The document was written by [Armen Bagdasarov]([armenbagdasarov.github.io](about:blankarmenbagdasarov.github.io)) (Duke University).
+1. A document that describes the plotting procedure in Brainstorm has been uploaded to the updated "pl_aac" folder on July-24-2022. The document was written by [Armen Bagdasarov](https://armenbagdasarov.github.io/) (Duke University).
 
 # Intermediate outputs 
 
